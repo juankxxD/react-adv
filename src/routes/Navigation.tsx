@@ -3,7 +3,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  NavLink
+  NavLink,
+  Redirect
 } from 'react-router-dom';
 
 import logo from '../logo.svg';
@@ -12,8 +13,8 @@ import { routes } from './routes';
 
 export const Navigation = () => {
   return ( 
-
-    <Suspense fallback={null}>
+    // @ts-ignore
+    <Suspense fallback={<span>Loading...</span>}>
     <Router>
       <div className="main-layout">
         <nav>
@@ -37,6 +38,9 @@ export const Navigation = () => {
         {<Component />}
     </Route>
   ))}
+  <Route path={'/*'}>
+      <Redirect to={`/${routes[0].path}`}/>
+    </Route>
 </Switch>
       </div>
     </Router>

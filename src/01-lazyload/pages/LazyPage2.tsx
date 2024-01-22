@@ -1,7 +1,7 @@
 
-function LazyPage2() {
+export function LazyPage2() {
   return (
-    <h1>LazyPage </h1>
+    <h1>LazyPage 2</h1>
   )
 }
 
