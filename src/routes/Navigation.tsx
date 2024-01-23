@@ -1,10 +1,10 @@
 import { Suspense } from "react";
 import {
   BrowserRouter as Router,
-  Switch,
   Route,
   NavLink,
-  Redirect,
+  Navigate,
+  Routes,
 } from "react-router-dom";
 
 import logo from "../logo.svg";
@@ -21,7 +21,10 @@ export const Navigation = () => {
             <ul>
               {routes.map((route) => (
                 <li key={route.to}>
-                  <NavLink to={route.to} activeClassName="nav-active" exact>
+                  <NavLink
+                    to={route.to}
+                    className={({ isActive }) => (isActive ? "nav-active" : "")}
+                  >
                     {route.name}
                   </NavLink>
                 </li>
@@ -29,18 +32,15 @@ export const Navigation = () => {
             </ul>
           </nav>
 
-          {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-          <Switch>
+         
+          <Routes>
             {routes.map(({ to, path, Component }) => (
-              <Route key={to} path={path}>
-                {<Component />}
-              </Route>
+              <Route key={to} path={path} element={<Component />} />
             ))}
-            <Route path={"/*"}>
-              <Redirect to={`${routes[0].to}`} />
-            </Route>
-          </Switch>
+
+            <Route path={"/*"} element={<Navigate to={routes[0].to} replace /> } />
+
+          </Routes>
         </div>
       </Router>
     </Suspense>

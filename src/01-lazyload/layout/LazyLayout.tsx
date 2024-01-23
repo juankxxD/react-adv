@@ -1,9 +1,4 @@
-import {
-  NavLink,
-  Route,
-  BrowserRouter as Router,
-  Switch,
-  } from "react-router-dom";
+import { NavLink, Routes, Route } from "react-router-dom";
 import { LazyPage03, LazyPage1, LazyPage2 } from "../pages";
 
 export const LazyLayout = () => {
@@ -22,22 +17,17 @@ export const LazyLayout = () => {
           <NavLink to="lazy3">Lazy3</NavLink>
         </li>
       </ul>
-      <Router>
-        {/* <Switch> */}
-          <Route path="/lazyload/lazy1">
-            <LazyPage1 />
-          </Route>
-          <Route path="/lazyload/lazy2">
-            <LazyPage2 />
-          </Route>
-          <Route path="/lazyload/lazy3">
-            <LazyPage03 />
-          </Route>
-          <Route path='*'>
-            <div>Not found</div>
-          </Route>
-          {/* </Switch> */}
-      </Router>
+      <Routes>
+
+          <Route path="lazy1" element={<LazyPage1 />} />
+            
+          <Route path="lazy2" element={<LazyPage2 />} />
+            
+          <Route path="lazy3" element={<LazyPage03 />} />
+            
+          <Route path='*' element={<div>Not found</div> } />
+            
+      </Routes>
     </div>
   );
 };
